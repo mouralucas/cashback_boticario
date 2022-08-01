@@ -99,8 +99,6 @@ class Revendedor:
         aux = compras.values('referencia').annotate(total=Sum('valor'))
         total_mes = {i['referencia']: i['total'] for i in aux}
 
-        # TODO: calcular o total por referencia e buscar o cashback via case em uma nova query, pode ser mais rápido
-        lista_cashback = []
         for compra in compras:
             if total_mes[compra['referencia']] <= 1000:
                 compra['perc_cashback'] = '10%'
@@ -135,8 +133,7 @@ class Revendedor:
             }
             return response
 
-
-        headers = {'token': 'ZXPURQOARHiMc6Y0flhRC1LVlZQVFRnm',  'content-type': 'application/json'}
+        headers = {'token': 'ZXPURQOARHiMc6Y0flhRC1LVlZQVFRnm', 'content-type': 'application/json'}
         url = 'https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1/cashback'
         data = {
             'cpf': self.cpf

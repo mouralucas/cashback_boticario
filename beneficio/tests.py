@@ -45,5 +45,4 @@ class TestCriacaoRevendedor(APITestCase):
 
         response_2 = self.client.post(url_compra, params={'cpf': '11111111111', 'codigo': 'T1', 'data': '2022-07-27', 'valor': 80.78},
                                       content_type='application/x-www-form-urlencoded', **{'HTTP_AUTHORIZATION': f'Bearer {self.teste_token}'})
-        print(json.loads(response_2.content)['descricao'])
         self.assertEqual(response_2.status_code, 200)
